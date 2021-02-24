@@ -7,7 +7,7 @@ import (
 
 // InitRoutes sets up routing.
 func InitRoutes(e *echo.Echo, serviceProvider *internal.ServiceProvider) {
-	class(serviceProvider).serve(e)
+	class(serviceProvider).handle(e)
 }
 
 // class sets up routes for class handlers.

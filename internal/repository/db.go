@@ -1,11 +1,9 @@
 package repository
 
+import "github.com/DandDevy/glofox/internal"
+
 // DB represents a database inside Glofox
 type DB struct {
-	tables []*table
+	classes []*internal.Class
 }
 
-// table represents a database table inside Glofox
-type table struct {
-	row []string
-}

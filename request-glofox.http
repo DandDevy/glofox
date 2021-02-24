@@ -2,8 +2,10 @@ POST http://localhost:8080/classes
 Content-Type: application/json
 
 {
-  "classes": {
+  "class": {
     "name": "test1",
+    "start_date": "01-10-20",
+    "end_date": "09-10-20",
     "capacity": 8
   }
 }

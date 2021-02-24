@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"github.com/DandDevy/glofox/internal"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -17,28 +16,43 @@ func newClassRoutes(serviceProvider *internal.ServiceProvider) *classRoutes {
 	return &classRoutes{serviceProvider: serviceProvider}
 }
 
+// createClassRequest represents a JSON
 type createClassRequest struct {
-	createClass struct {
-		name      string `json:"name"`
-		startDate string `json:"start_date"`
-		endDate   string `json:"end_date"`
-		capacity  uint `json:"capacity"`
+	CreateClass struct {
+		Name      string `json:"name"`
+		StartDate string `json:"start_date"`
+		EndDate   string `json:"end_date" `
+		Capacity  uint   `json:"capacity"`
 	} `json:"class"`
 }
 
-
-
-func (* classRoutes) serve(e *echo.Echo)  {
-	e.POST("/classes", create)
+func (r *createClassRequest) toClass() internal.Class {
+	return internal.Class{
+		Name: r.CreateClass.Name,
+		StartDate: r.CreateClass.StartDate,
+		EndDate: r.CreateClass.EndDate,
+		Capacity: r.CreateClass.Capacity,
+	}
 }
 
-func create(context echo.Context) error {
+
+func (c* classRoutes) handle(e *echo.Echo)  {
+	e.POST("/classes", c.create)
+}
+
+func (c* classRoutes) create(context echo.Context) error {
 
 	var req createClassRequest
+
 	if err := context.Bind(&req); err != nil {
-		return err
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	fmt.Println(req)
-	return context.JSON(http.StatusOK, req)
+	class := req.toClass()
+	add, err := c.serviceProvider.Class().Add(class)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusCreated, add)
 }

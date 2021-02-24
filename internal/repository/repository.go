@@ -1,5 +1,7 @@
 package repository
 
+import "github.com/DandDevy/glofox/internal"
+
 // RepositoryProvider provides access to Glofox repositories.
 type RepositoryProvider struct {
 	db *DB
@@ -9,3 +11,9 @@ type RepositoryProvider struct {
 func NewRepositoryProvider(db *DB) *RepositoryProvider {
 	return &RepositoryProvider{db: db}
 }
+
+func (r *RepositoryProvider) Class() internal.ClassRepository {
+	return NewClassRepository(r.db)
+}
+
+
