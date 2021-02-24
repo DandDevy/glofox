@@ -19,3 +19,8 @@ func (r *ClassRepository) Add(class internal.Class) (*internal.Class, error) {
 	r.db.classes = append(r.db.classes, &class)
 	return &class, nil
 }
+
+// List classes.
+func (r *ClassRepository) List() []*internal.Class {
+	return r.db.classes
+}

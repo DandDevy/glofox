@@ -6,7 +6,10 @@ import (
 
 // ClassRepository interface provides access to persisted classes.
 type ClassRepository interface {
+	// Add adds a new class.
 	Add(class Class) (*Class, error)
+	// List classes.
+	List() []*Class
 }
 
 // ClassService implements ClassRepository and provides service to classes.
@@ -30,6 +33,11 @@ func (s *ClassService) Add(class Class) (*Class, error) {
 	}
 
 	return newClass, nil
+}
+
+// List classes.
+func (s *ClassService) List() []*Class {
+	return s.repo.List()
 }
 
 // Class represents a class in internal Glofox

@@ -38,9 +38,11 @@ func (r *createClassRequest) toClass() internal.Class {
 
 func (c* classRoutes) handle(e *echo.Echo)  {
 	e.POST("/classes", c.create)
+	e.GET("/classes", c.list)
 }
 
-func (c* classRoutes) create(context echo.Context) error {
+// create class endpoint
+func (c *classRoutes) create(context echo.Context) error {
 
 	var req createClassRequest
 
@@ -55,4 +57,12 @@ func (c* classRoutes) create(context echo.Context) error {
 	}
 
 	return context.JSON(http.StatusCreated, add)
+}
+
+// list classes endpoint.
+func (c *classRoutes) list(context echo.Context) error {
+
+	classes := c.serviceProvider.Class().List()
+
+	return context.JSON(http.StatusOK, classes)
 }
