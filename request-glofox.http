@@ -1,0 +1,11 @@
+POST http://localhost:8080/classes
+Content-Type: application/json
+
+{
+  "classes": {
+    "name": "test1",
+    "capacity": 8
+  }
+}
+
+###
