@@ -11,4 +11,4 @@ go run cmd/glofox/main.go
 
 ### issues
 There is a mistake with the way times work for classes.
-System does not bother to check capacity limits.
+System does not bother to check capacity limits or unique class names.
