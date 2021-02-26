@@ -16,4 +16,8 @@ func (r *RepositoryProvider) Class() internal.ClassRepository {
 	return NewClassRepository(r.db)
 }
 
+func (r *RepositoryProvider) Booking() internal.BookingRepository {
+	return NewBookingRepository(r.db)
+}
+
 

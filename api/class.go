@@ -6,17 +6,17 @@ import (
 	"net/http"
 )
 
-// classRoutes for routing classes
+// classRoutes for routing classes.
 type classRoutes struct {
 	serviceProvider *internal.ServiceProvider
 }
 
-// newClassRoutes returns new classRoutes
+// newClassRoutes returns new classRoutes.
 func newClassRoutes(serviceProvider *internal.ServiceProvider) *classRoutes {
 	return &classRoutes{serviceProvider: serviceProvider}
 }
 
-// createClassRequest represents a JSON
+// createClassRequest represents a JSON request for creating a class.
 type createClassRequest struct {
 	CreateClass struct {
 		Name      string `json:"name"`
